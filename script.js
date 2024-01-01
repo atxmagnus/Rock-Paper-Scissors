@@ -1,6 +1,17 @@
 let userChoice;
 let computerChoice;
 let player = computer = tie = 0;
+//make a loop to call the functions 5 times
+// CREATE BUTTON Rock
+const rock = document.createElement('button');
+document.body.appendChild(rock);
+// CREATE BUTTON PAPER
+// CREATE BUTTON SCISSORS
+// ADD EVENT LISTENER TO BUTTON ROCK THAT CALLS THE FUNCTION AS ROCK AS THE PARAMETER
+// ADD EVENT LISTENER TO BUTTON PAPER THAT CALLS THE FUNCTION AS PAPER AS THE PARAMETER
+// ADD EVENT LISTENER TO BUTTON SCISSORS THAT CALLS THE FUNCTION AS SCISSORS AS THE PARAMETER
+// CREATE A DIV TO DISPLAY RESULTS
+// ONCE 5 ROUNDS WERE PLAYED ANNOUNCE A WINNER
 
 //create a function to randomly generate either 'Rock', 'Paper' or 'Scissors'
 function generateComputerChoice() {
@@ -60,32 +71,7 @@ function compareUserInput(choice) {
     }
 }
 
-function getUserInput() {
-    userChoice = prompt("Rock, Paper or Scissors?");
-    if (userChoice != null) {
-        //The user input must be case-insensitive, makes the first letter upper case and the rest lower case for further comparison
-        userChoice = userChoice.charAt(0).toUpperCase() + userChoice.slice(1).toLowerCase();
-    }
-    else
-        alert("You cancelled!");
-}
 
-//make a loop to call the functions 5 times
-for (let x = 0; x < 5; x++) {
-    let winner = compareUserInput();
-    if (winner == "player") {
-        alert("The player winned!");
-        player++;
-    }
-    else if (winner == "computer") {
-        alert("The computer winned!");
-        computer++;
-    }
-    else if (winner == "tie") {
-        alert("Tie!");
-        tie++;
-    }
-}
 
 // keep scores and report who won the most
 if (player > computer) {
