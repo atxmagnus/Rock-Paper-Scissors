@@ -11,12 +11,19 @@ const paper = document.createElement('button');
 paper.innerHTML = "Paper";
 document.body.appendChild(paper);
 paper.addEventListener("click", function () { compareUserInput("Paper") });
-const scissor = document.createElement('button');
-scissor.innerHTML = "Scissor";
-document.body.appendChild(scissor);
-scissor.addEventListener("click", function () { compareUserInput("Scissor") });
-// CREATE A DIV TO DISPLAY RESULTS
-// ONCE 5 ROUNDS WERE PLAYED ANNOUNCE A WINNER
+const scissors = document.createElement('button');
+scissors.innerHTML = "Scissors";
+document.body.appendChild(scissors);
+scissors.addEventListener("click", function () { compareUserInput("Scissors") });
+const score = document.createElement('p');
+score.innerText = `Player: ${player}\nComputer: ${computer}\nTies: ${tie}`;
+document.body.append(score);
+const resetBtn = document.createElement('button');
+resetBtn.innerHTML = 'Reset';
+resetBtn.addEventListener('click', reset);
+document.body.appendChild(resetBtn);
+const results = document.createElement('div');
+
 
 //create a function to randomly generate either 'Rock', 'Paper' or 'Scissors'
 function generateComputerChoice() {
@@ -70,22 +77,34 @@ function compareUserInput(userChoice) {
     else if (userChoice == "Scissors" && computerChoice == "Rock") {
         computer++;
     }
+    score.innerText = `Player: ${player}\nComputer: ${computer}\nTies: ${tie}`;
+    if (rounds == 5)
+        displayResults();
 }
 
 
 
 // keep scores and report who won the most
 function displayResults() {
-    const results = document.createElement('div');
-
-    if (player > computer) {
+    paper.disabled = true;
+    rock.disabled = true;
+    scissors.disabled = true;
+    if (player > computer && player >= tie) {
         results.innerHTML = "The player has won the most!\nPlayer: " + player + "\nComputer: " + computer + "\nTie: " + tie;
     }
-    else if (computer > player) {
+    else if (computer > player && computer >= tie) {
         results.innerHTML = "The computer has won the most!\nComputer: " + computer + "\nPlayer: " + player + "\nTie: " + tie;
     }
     else {
         results.innerHTML = "Tie! No one has won!\nTie: " + tie + "\nPlayer: " + player + "\nComputer: " + computer;
     }
     document.body.appendChild(results);
+}
+
+function reset() {
+    rounds = player = computer = tie = 0;
+    results.innerHTML = '';
+    paper.disabled = false;
+    rock.disabled = false;
+    scissors.disabled = false;
 }
